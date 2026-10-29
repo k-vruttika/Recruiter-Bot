@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "Recruiterflow - Recruiter Bot",
+    "description": "Manual test requests for the Recruiter Bot API. Start the server with `npm start` first. The base URL is stored in the collection variable `baseUrl`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Matches for job 1 (Backend Detective)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/jobs/1/matches",
+        "description": "Expected: 200 OK. Candidates ranked best to worst. Sherlock H. should be rank 1."
+      }
+    },
+    {
+      "name": "Matches for candidate 1 (Sherlock H.)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/candidates/1/matches",
+        "description": "Expected: 200 OK. Jobs ranked best to worst. Backend Detective should be rank 1."
+      }
+    },
+    {
+      "name": "Invalid job ID (abc)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/jobs/abc/matches",
+        "description": "Expected: 400 Bad Request, because the ID is not a positive whole number."
+      }
+    },
+    {
+      "name": "Nonexistent job ID (999)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/jobs/999/matches",
+        "description": "Expected: 404 Not Found, because no job has ID 999."
+      }
+    },
+    {
+      "name": "Invalid candidate ID (abc)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/candidates/abc/matches",
+        "description": "Expected: 400 Bad Request, because the ID is not a positive whole number."
+      }
+    },
+    {
+      "name": "Nonexistent candidate ID (999)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/candidates/999/matches",
+        "description": "Expected: 404 Not Found, because no candidate has ID 999."
+      }
+    },
+    {
+      "name": "List all jobs",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/jobs",
+        "description": "Expected: 200 OK. All 6 jobs with their IDs, required skills and culture keywords."
+      }
+    },
+    {
+      "name": "List all candidates",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/candidates",
+        "description": "Expected: 200 OK. All 15 candidates with their IDs, skills and traits."
+      }
+    }
+  ]
+}
